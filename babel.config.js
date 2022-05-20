@@ -15,8 +15,9 @@ module.exports = function (api) {
             '.json',
           ],
           alias: {
-            '@components': './src/components',
             '@pages: ': './src/pages',
+            '@components': './src/components',
+            '@hooks': './src/hooks',
             '@assets': './src/assets',
           }
         }
