@@ -11,6 +11,7 @@ import { AuthProvider } from '@hooks/auth';
 import theme from './src/theme';
 
 import { SignIn } from './src/pages/SignIn';
+import { Product } from '@pages/Product';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -30,7 +31,7 @@ export default function App() {
       <StatusBar style="light" translucent backgroundColor="transparent" />
 
       <AuthProvider>
-        <SignIn />
+        <Product />
       </AuthProvider>
     </ThemeProvider>
   );

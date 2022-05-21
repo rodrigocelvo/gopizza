@@ -23,6 +23,7 @@ type AuthProviderProps = {
 type AuthContextData = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
   isLogging: boolean;
   user: User | null;
 };
@@ -104,12 +105,30 @@ function AuthProvider({ children }: AuthProviderProps) {
     setUser(null);
   }
 
+  async function forgotPassword(email: string) {
+    if (!email) {
+      return Alert.alert('Esqueci minha senha', 'Informe o e-mail.');
+    }
+
+    setIsLogging(true);
+
+    auth()
+      .sendPasswordResetEmail(email)
+      .then(() => Alert.alert('Esqueci minha senha', 'Um e-mail foi enviado.'))
+      .catch((error) =>
+        Alert.alert('Esqueci minha senha', 'Erro ao enviar e-mail.')
+      )
+      .finally(() => setIsLogging(false));
+  }
+
   useEffect(() => {
     loadUserStorageData();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isLogging, user }}>
+    <AuthContext.Provider
+      value={{ user, signIn, signOut, forgotPassword, isLogging }}
+    >
       {children}
     </AuthContext.Provider>
   );
