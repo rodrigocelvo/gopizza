@@ -5,13 +5,11 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display';
 import { ThemeProvider } from 'styled-components/native';
-
 import { AuthProvider } from '@hooks/auth';
 
-import theme from './src/theme';
+import { Routes } from './src/routes';
 
-import { SignIn } from './src/pages/SignIn';
-import { Home } from '@pages/Home';
+import theme from './src/theme';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -31,7 +29,7 @@ export default function App() {
       <StatusBar style="light" translucent backgroundColor="transparent" />
 
       <AuthProvider>
-        <Home />
+        <Routes />
       </AuthProvider>
     </ThemeProvider>
   );
