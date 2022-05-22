@@ -7,6 +7,8 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import happyEmoji from '@assets/happy.png';
 
+import { useAuth } from '@hooks/auth';
+
 import { Search } from '@components/Search';
 import { ProductCard, ProductProps } from '@components/ProductCard';
 
@@ -26,6 +28,7 @@ export function Home() {
   const [pizzas, setPizzas] = useState<ProductProps[]>([]);
   const [search, setSearch] = useState('');
 
+  const { signOut, user } = useAuth();
   const { COLORS } = useTheme();
   const navigation = useNavigation();
 
@@ -60,11 +63,31 @@ export function Home() {
   }
 
   function handleOpen(id: string) {
-    navigation.navigate('product', { id });
+    const route = user?.isAdmin ? 'product' : 'order';
+
+    navigation.navigate(route, { id });
   }
 
   function handleAdd() {
     navigation.navigate('product', {});
+  }
+
+  function handleSignOut() {
+    Alert.alert(
+      'Sair',
+      'Deseja realmente sair?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Sim',
+          onPress: () => signOut(),
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   useFocusEffect(
@@ -78,10 +101,10 @@ export function Home() {
       <Header>
         <Greeting>
           <GreetingEmoji source={happyEmoji} />
-          <GreetingText>Olá, Admin</GreetingText>
+          <GreetingText>Olá, {user?.isAdmin ? 'Admin' : 'Garçom'}</GreetingText>
         </Greeting>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSignOut}>
           <MaterialIcons name="logout" size={24} color={COLORS.TITLE} />
         </TouchableOpacity>
       </Header>
@@ -112,11 +135,13 @@ export function Home() {
         }}
       />
 
-      <NewProductButton
-        title="Cadastrar Pizza"
-        type="secondary"
-        onPress={handleAdd}
-      />
+      {user?.isAdmin && (
+        <NewProductButton
+          title="Cadastrar Pizza"
+          type="secondary"
+          onPress={handleAdd}
+        />
+      )}
     </Container>
   );
 }

@@ -10,6 +10,8 @@ import * as ImagePicker from 'expo-image-picker';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
+import { useTheme } from 'styled-components';
 
 import { ProductNavigationProps } from '@src/@types/navigation';
 
@@ -53,6 +55,7 @@ export function Product() {
   const [isLoading, setIsLoading] = useState(false);
   const [photoPath, setPhotoPath] = useState('');
 
+  const { COLORS } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
   const { id } = route.params as ProductNavigationProps;
@@ -160,7 +163,7 @@ export function Product() {
           <Title>{id ? 'Detalhes' : 'Cadastrar'}</Title>
           {id ? (
             <TouchableOpacity onPress={handleDelete}>
-              <DeleteLabel>Deletar</DeleteLabel>
+              <Feather name="trash" size={24} color={COLORS.SHAPE} />
             </TouchableOpacity>
           ) : (
             <View style={{ width: 20 }} />
