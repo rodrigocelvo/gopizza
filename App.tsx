@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { AuthProvider } from '@hooks/auth';
 
 import { Routes } from './src/routes';
+import { Orders } from '@pages/Orders';
 
 import theme from './src/theme';
 
@@ -29,7 +30,7 @@ export default function App() {
       <StatusBar style="light" translucent backgroundColor="transparent" />
 
       <AuthProvider>
-        <Routes />
+        <Orders />
       </AuthProvider>
     </ThemeProvider>
   );
