@@ -50,7 +50,7 @@ Em seguida, inicie o projeto.
 
 Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
-## 🧑‍🏫 Instrutor
+## 🧑‍ Instrutor
 
 [Rodrigo Gonçalves](https://github.com/rodrigorgtic)
 
