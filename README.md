@@ -41,6 +41,9 @@ Em seguida, inicie o projeto.
  yarn ou npm install
 ```
 
+O projeto usa Firebase como banco de dados então é necessário configura-los, adcionando 
+``google-services.json`` para android e ``GoogleService-Info.plist`` para ios.
+
 ## 🤔 Como contribuir
 
 - Faça um fork desse repositório;
